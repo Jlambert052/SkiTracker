@@ -1,0 +1,25 @@
+SKI TRACKER
+
+Overview-
+
+Database of Resorts and Runs, along with associated data (length, vertical, difficulty, features)
+-Model for Ski Resort + Controller for Ski Resort (5 funcs)
+-Model for Ski Run; FK to Resort + controller for Ski Resort (5 funcs)
+-Model for Skiier + Controller for Skiier (5 funcs + Recalc Totals + Skiier Login)
+-Model for Ski Trip; FK to Skiier + Ski Resort (5 funcs + 
+-Model for Weather History + Controller (5 funcs)
+
+Tracks ski visit totals (total vertical, distance skiied, # of runs total and per route/run)
+
+Rate resorts and runs (1-5 for resorts and runs, comments and notes)
+
+Record weather history (Snowfall during stay, temperatures, snow conditions)
+
+Busyness of resort (waits for lifts, parking, weekend vs weekday)
+
+Skiier Accounts to track personal data and still access full database
+
+Images/pictures of runs and resorts
+
+
+
