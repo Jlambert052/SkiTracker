@@ -14,7 +14,15 @@ namespace SkiTracker.Models {
 
         public DbSet<SkiTrip> SkiTrips { get; set; }
 
+        public DbSet<SkiTripLine> SkiTripLines {  get; set; }
+
         public SkiTrackerDbContext(DbContextOptions<SkiTrackerDbContext> options) : base(options) { }
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder) {
+            builder.Properties<DateOnly>()
+                .HaveConversion<DateOnlyConverter>()
+                .HaveColumnType("date");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
     }
