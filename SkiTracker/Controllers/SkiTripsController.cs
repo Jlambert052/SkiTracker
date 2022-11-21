@@ -20,19 +20,19 @@ namespace SkiTracker.Controllers
             _context = context;
         }
 
+
+
+
         // GET: api/SkiTrips
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SkiTrip>>> GetSkiTrips()
         {
-            return await _context.SkiTrips.
-                                           Include(x => x.Skiier)
-                                           .ToListAsync();
+            return await _context.SkiTrips.ToListAsync();
         }
 
         // GET: api/SkiTrips/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SkiTrip>> GetSkiTrip(int id)
-        {
+        public async Task<ActionResult<SkiTrip>> GetSkiTrip(int id) {
             var skiTrip = await _context.SkiTrips
                                                 .Include(x => x.SkiTripLines)!
                                                 .ThenInclude(x => x.Run)
@@ -40,8 +40,7 @@ namespace SkiTracker.Controllers
                                                 .SingleOrDefaultAsync(x => x.Id == id);
 
 
-            if (skiTrip == null)
-            {
+            if (skiTrip == null) {
                 return NotFound();
             }
 

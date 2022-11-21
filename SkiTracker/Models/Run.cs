@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkiTracker.Models {
 
@@ -19,6 +20,9 @@ namespace SkiTracker.Models {
 
         [StringLength(150)]
         public string Notes { get; set; }
+
+        [Column(TypeName ="Decimal(5,2)")]
+        public decimal Vertical { get; set; }
 
         public int ResortId { get; set; }
         public virtual Resort? Resort { get; set; }

@@ -9,6 +9,9 @@ Database of Resorts and Runs, along with associated data (length, vertical, diff
 -Model for Ski Trip; FK to Skiier + Ski Resort (5 funcs + 
 -Model for Weather History + Controller (5 funcs)
 
+
+Methods: SkiTrip total recalculator (total runs done; distance total)
+
 Tracks ski visit totals (total vertical, distance skiied, # of runs total and per route/run)
 
 Rate resorts and runs (1-5 for resorts and runs, comments and notes)

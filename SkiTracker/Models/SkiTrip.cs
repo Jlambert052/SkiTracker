@@ -31,6 +31,11 @@ namespace SkiTracker.Models {
         [Required]
         public int Rating { get; set; } = 0;
 
+        public int RunTotal { get; set; }
+
+        [Column(TypeName ="Decimal(7,2)")]
+        public decimal VerticalTotal { get; set; }
+
         public virtual IEnumerable<SkiTripLine>? SkiTripLines { get; set; }
     }
 }

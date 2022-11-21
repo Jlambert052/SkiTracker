@@ -20,6 +20,38 @@ namespace SkiTracker.Controllers
             _context = context;
         }
 
+        //PRIVATE: Called inside of other tripline functions
+        //Recalculates the total # of runs and total vertical.
+        private async Task<IActionResult> RecalculateTripTotal(int skitripid) {
+            var skiTrip = await _context.SkiTrips.FindAsync(skitripid);
+            if(skiTrip == null) {
+                throw new Exception(
+                    "Invalid ID; try new id or check skiTrips"
+                    );
+            }
+            skiTrip.RunTotal = (from stl in _context.SkiTripLines
+                                join r in _context.Runs
+                                on stl.RunId equals r.Id
+                                where skitripid == stl.SkiTripId
+                                select new {
+                                    Total = stl.RunCount
+                                }
+                                ).Sum(x => x.Total);
+
+            skiTrip.VerticalTotal = (from stl in _context.SkiTripLines
+                                     join r in _context.Runs
+                                     on stl.RunId equals r.Id
+                                     where skitripid == stl.SkiTripId
+                                     select new {
+                                         VertTotal = stl.RunCount * r.Vertical
+                                     }).Sum(x => x.VertTotal);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
         // GET: api/SkiTripLines
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SkiTripLine>>> GetSkiTripLines()
@@ -68,7 +100,7 @@ namespace SkiTracker.Controllers
                     throw;
                 }
             }
-
+            await RecalculateTripTotal(skiTripLine.SkiTripId);
             return NoContent();
         }
 
@@ -79,7 +111,7 @@ namespace SkiTracker.Controllers
         {
             _context.SkiTripLines.Add(skiTripLine);
             await _context.SaveChangesAsync();
-
+            await RecalculateTripTotal(skiTripLine.SkiTripId);
             return CreatedAtAction("GetSkiTripLine", new { id = skiTripLine.Id }, skiTripLine);
         }
 
@@ -95,6 +127,7 @@ namespace SkiTracker.Controllers
 
             _context.SkiTripLines.Remove(skiTripLine);
             await _context.SaveChangesAsync();
+            await RecalculateTripTotal(skiTripLine.SkiTripId);
 
             return NoContent();
         }
