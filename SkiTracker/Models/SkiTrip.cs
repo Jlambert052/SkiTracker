@@ -22,19 +22,28 @@ namespace SkiTracker.Models {
         public int ResortId { get; set; }
         public virtual Resort? Resort { get; set; }
 
-        public int SkiierId { get; set; }
-        public virtual Skiier? Skiier { get; set; }
+        [StringLength(100)]
+        public string Status { get; set; } = "planning";
+
+        public int Attendees { get; set; } = 0;
+
+        [StringLength(200)]
+        public string Housing { get; set; } = "";
+
+        [Column(TypeName = "Decimal(7,2)")]
+        public decimal HousingCost { get; set; } = 0;
 
         [StringLength(255)]
         public string Notes { get; set; } = "";
 
-        [Required]
         public int Rating { get; set; } = 0;
 
         public int RunTotal { get; set; }
 
         [Column(TypeName ="Decimal(7,2)")]
         public decimal VerticalTotal { get; set; }
+
+        public virtual IEnumerable<Skiier>? Skiiers { get; set; }
 
         public virtual IEnumerable<SkiTripLine>? SkiTripLines { get; set; }
     }

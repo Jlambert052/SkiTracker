@@ -20,9 +20,6 @@ namespace SkiTracker.Controllers
             _context = context;
         }
 
-
-
-
         // GET: api/SkiTrips
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SkiTrip>>> GetSkiTrips()
@@ -36,7 +33,7 @@ namespace SkiTracker.Controllers
             var skiTrip = await _context.SkiTrips
                                                 .Include(x => x.SkiTripLines)!
                                                 .ThenInclude(x => x.Run)
-                                                .Include(x => x.Skiier)
+                                                .Include(x => x.Skiiers)
                                                 .SingleOrDefaultAsync(x => x.Id == id);
 
 

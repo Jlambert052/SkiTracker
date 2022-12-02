@@ -11,6 +11,8 @@ Database of Resorts and Runs, along with associated data (length, vertical, diff
 
 
 Methods: SkiTrip total recalculator (total runs done; distance total)
+Login: Retrieves User for entered email + password
+
 
 Tracks ski visit totals (total vertical, distance skiied, # of runs total and per route/run)
 
