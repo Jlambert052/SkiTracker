@@ -43,7 +43,7 @@ namespace SkiTracker.Models {
         [Column(TypeName ="Decimal(7,2)")]
         public decimal VerticalTotal { get; set; }
 
-        public virtual IEnumerable<Skiier>? Skiiers { get; set; }
+        public virtual IEnumerable<SkiTripAttendee>? Skiiers { get; set; }
 
         public virtual IEnumerable<SkiTripLine>? SkiTripLines { get; set; }
     }

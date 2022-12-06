@@ -14,6 +14,8 @@ namespace SkiTracker.Models {
         [JsonIgnore]
         public virtual SkiTrip? SkiTrip { get; set; }
 
+        public int SkiierId { get; set; }
+        public virtual Skiier? Skiier { get; set; }
 
     }
 }

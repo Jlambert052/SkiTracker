@@ -23,7 +23,7 @@ namespace SkiTracker.Models {
         [StringLength(50)]
         public string Experience { get; set; }
 
-
+        public virtual IEnumerable<SkiTrip>? Trips { get; set; }
 
     }
 }
