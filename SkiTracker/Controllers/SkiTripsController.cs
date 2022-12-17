@@ -20,6 +20,35 @@ namespace SkiTracker.Controllers
             _context = context;
         }
 
+        //Private: Recalculate functionality.
+        private async Task<ActionResult>  RecalcSkiTrip(int skiTripId) {
+            var skiTrip = await _context.SkiTrips.FindAsync(skiTripId);
+            if(skiTrip == null) {
+                throw new Exception(
+                    "Invalid; trip does not exist"
+                    );
+            }
+            //Automatically checks the number of Skiiers attached to the tripID and updates the INT value on SkiTrip
+            skiTrip.Attendees = (from STA in _context.SkiTripAttendees
+                                 join ST in _context.SkiTrips
+                                 on STA.SkiTripId equals ST.Id
+                                 where skiTripId == STA.SkiTripId
+                                 select new {
+                                     Skiiers = ST.Skiiers
+                                 }).Count();
+
+            //calculate housing cost as a function of # of nights and 1 night cost. Days = total days -1.
+            skiTrip.HousingTotal = (from ST in _context.SkiTrips
+                                    where skiTripId == ST.Id
+                                    select new {
+                                        HousingTot = ST.HousingCost * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
+                                    }).Sum(x => x.HousingTot);
+
+
+
+        }
+
+
         // GET: api/SkiTrips
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SkiTrip>>> GetSkiTrips()

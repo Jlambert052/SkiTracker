@@ -25,13 +25,15 @@ namespace SkiTracker.Models {
         [StringLength(100)]
         public string Status { get; set; } = "planning";
 
-        public int Attendees { get; set; } = 0;
+        public int Attendees { get; set; } = 1;
 
         [StringLength(200)]
         public string Housing { get; set; } = "";
 
         [Column(TypeName = "Decimal(7,2)")]
-        public decimal HousingCost { get; set; } = 0;
+        public decimal HousingCost { get; set; } = 1;
+
+        public decimal HousingTotal { get; set; } = 1;
 
         [StringLength(255)]
         public string Notes { get; set; } = "";
@@ -39,9 +41,6 @@ namespace SkiTracker.Models {
         public int Rating { get; set; } = 0;
 
         public int RunTotal { get; set; }
-
-        [Column(TypeName ="Decimal(7,2)")]
-        public decimal VerticalTotal { get; set; }
 
         public virtual IEnumerable<SkiTripAttendee>? Skiiers { get; set; }
 

@@ -38,14 +38,6 @@ namespace SkiTracker.Controllers
                                 }
                                 ).Sum(x => x.Total);
 
-            skiTrip.VerticalTotal = (from stl in _context.SkiTripLines
-                                     join r in _context.Runs
-                                     on stl.RunId equals r.Id
-                                     where skitripid == stl.SkiTripId
-                                     select new {
-                                         VertTotal = stl.RunCount * r.Vertical
-                                     }).Sum(x => x.VertTotal);
-
             await _context.SaveChangesAsync();
 
             return NoContent();
