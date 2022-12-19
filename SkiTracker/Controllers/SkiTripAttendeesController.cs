@@ -27,11 +27,26 @@ namespace SkiTracker.Controllers
             return await _context.SkiTripAttendees.ToListAsync();
         }
 
+
+
         //PRIVATE: Update functionality
 
         //Update # of attendees in SkiTrip based on changes to SkiTripAttendees
         private async Task<ActionResult> UpdateAttendeeInt(int SkiTripAttendeeId) {
-            var 
+            var SkiTripAttendee = await _context.SkiTripAttendees.FindAsync(SkiTripAttendeeId);
+
+            if(SkiTripAttendee == null) {
+                throw new Exception(
+                    "Error; entry does not exist");
+            }
+            var SkiTrip = await _context.SkiTrips.FindAsync(SkiTripAttendee.SkiTripId);
+
+            SkiTrip.Attendees = (from ST in _context.SkiTrips
+                                 join STA in _context.SkiTripAttendees
+                                 on ST.Id equals STA.SkiTripId
+                                 select new {
+                                     AttendeeTotal = ST.Skiiers
+                                 }).Count();
         }
 
 
