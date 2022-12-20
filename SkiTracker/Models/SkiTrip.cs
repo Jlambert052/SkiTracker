@@ -31,7 +31,7 @@ namespace SkiTracker.Models {
         public string Housing { get; set; } = "";
 
         [Column(TypeName = "Decimal(7,2)")]
-        public decimal HousingCost { get; set; } = 1;
+        public decimal HousingCostPerNight { get; set; } = 1;
 
         public decimal HousingTotal { get; set; } = 1;
 

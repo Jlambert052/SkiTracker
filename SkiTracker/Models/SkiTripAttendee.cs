@@ -8,7 +8,7 @@ namespace SkiTracker.Models {
         [Column(TypeName ="Decimal(7,2)")]
         public decimal LodgingCost { get; set; } = 1;
 
-
+        public int RunCount { get; set; } = 0;
 
         public int SkiierId { get; set; }
         public virtual Skiier? Skiier {get; set;}
