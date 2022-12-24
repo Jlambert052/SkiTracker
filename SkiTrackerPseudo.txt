@@ -10,7 +10,7 @@ Database of Resorts and Runs, along with associated data (length, vertical, diff
 -Model for Weather History + Controller (5 funcs)
 
 
-Methods: SkiTrip total recalculator (total runs done; distance total)
+Methods: SkiTrip total recalculator (total runs done)
 Login: Retrieves User for entered email + password
 
 

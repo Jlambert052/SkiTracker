@@ -18,20 +18,29 @@ namespace SkiTracker.Models {
         [StringLength(2)]
         public string State { get; set; }
 
-        [Column(TypeName ="Decimal(7,0)")]
+        [Column(TypeName = "Decimal(5,2)")]
+        public decimal TicketCostAvg { get; set; } = 1;
+
+        public int PassCost { get; set; } = 1;
+
+        [Column(TypeName = "Decimal(5,2)")]
+        public decimal YearlySnowfall { get; set; } = 1;
+
+        [StringLength(25)]
+        public string OpenTime { get; set; } = "8 am";
+
+        [StringLength(25)]
+        public string CloseTime { get; set; } = "7 pm";
+
         public int Lifts { get; set; }
 
-        [Column(TypeName ="Decimal(7,2)")]
         public int Vertical { get; set; }
 
-        [Column(TypeName ="Decimal(7,0)")]
         public int Trails { get; set; }
 
         public bool BeginnerFriendly { get; set; }
 
-        public bool IntermediateFriendly { get; set; }
-
-        public bool ExpertFriendly { get; set; }
+        public bool ExpertsOnly { get; set; }
 
         public bool NightSki { get; set; }
 
