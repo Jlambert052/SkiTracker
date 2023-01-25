@@ -14,10 +14,10 @@ namespace SkiTracker.Models {
         public string TripName { get; set; } = "";
 
         [Column(TypeName = "Date")]
-        public DateOnly Arrival { get; set; }
+        public DateOnly Arrival { get; set; } = new DateOnly();
 
         [Column(TypeName = "Date")]
-        public DateOnly Departure { get; set; }
+        public DateOnly Departure { get; set; } = new DateOnly();
 
         public int ResortId { get; set; }
         public virtual Resort? Resort { get; set; }
@@ -33,7 +33,11 @@ namespace SkiTracker.Models {
         [Column(TypeName = "Decimal(7,2)")]
         public decimal HousingCostPerNight { get; set; } = 1;
 
+        [Column(TypeName = "Decimal(7,2)")]
         public decimal HousingTotal { get; set; } = 1;
+
+        [Column(TypeName = "Decimal(5,2)")]
+        public decimal TicketTotal { get; set; } = 1;
 
         [StringLength(255)]
         public string Notes { get; set; } = "";

@@ -32,7 +32,8 @@ namespace SkiTracker.Controllers
         //PRIVATE: Update functionality
 
         //Update # of attendees in SkiTrip based on changes to SkiTripAttendees
-        private async Task<ActionResult> UpdateAttendeeInt(int SkiTripAttendeeId) {
+        /* obselete; added on Ski Trip Controller.
+         * private async Task<ActionResult> UpdateAttendeeInt(int SkiTripAttendeeId) {
             var SkiTripAttendee = await _context.SkiTripAttendees.FindAsync(SkiTripAttendeeId);
 
             if(SkiTripAttendee == null) {
@@ -48,7 +49,11 @@ namespace SkiTracker.Controllers
                                      AttendeeTotal = ST.Skiiers
                                  }).Count();
         }
+        */
 
+        //Update LodgePaid to check if the amount under PaidAmount is = to LodgingCost
+        //private async Task<ActionResult> UpdateLodgePaid(int SkiTripAttendeeId) {}
+        
 
         // GET: api/SkiTripAttendees/5
         [HttpGet("{id}")]

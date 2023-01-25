@@ -41,13 +41,25 @@ namespace SkiTracker.Controllers
             skiTrip.HousingTotal = (from ST in _context.SkiTrips
                                     where skiTripId == ST.Id
                                     select new {
-                                        HousingTot = ST.HousingCost * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
+                                        HousingTot = ST.HousingCostPerNight * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
                                     }).Sum(x => x.HousingTot);
 
+            //calculate Ticket total cost as function of day ticket price * days of skiing based on arrival and departure dates. 
+            skiTrip.TicketTotal = (from R in _context.Resorts
+                                   join ST in _context.SkiTrips
+                                   on R.Id equals ST.ResortId
+                                   where skiTripId == R.Id
+                                   select new {
+                                       TicketTot = R.TicketCostAvg * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
+                                   }).Sum(x => x.TicketTot);
 
+
+            return NoContent();
 
         }
 
+        //Update LodgingCost to the correct amount by taking HousingCostPerNight from SkiTrip and multiplying it by the # of nights based on arrival/departure time.
+        //private async Task<ActionResult> UpdateLodgeCost(int SkiTripAttendeeId) {}
 
         // GET: api/SkiTrips
         [HttpGet]

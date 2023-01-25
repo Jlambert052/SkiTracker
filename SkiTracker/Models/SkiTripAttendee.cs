@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkiTracker.Models {
     public class SkiTripAttendee {
@@ -7,6 +8,9 @@ namespace SkiTracker.Models {
 
         [Column(TypeName ="Decimal(7,2)")]
         public decimal LodgingCost { get; set; } = 1;
+
+        [Column(TypeName = "Decimal(7,2)")]
+        public decimal PaidAmount { get; set; } = 0;
 
         public bool LodgePaid { get; set; } = false;
 

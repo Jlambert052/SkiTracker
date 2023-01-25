@@ -15,7 +15,7 @@ namespace SkiTracker.Models {
         [StringLength(75)]
         public string City { get; set; }
 
-        [StringLength(2)]
+        [StringLength(2, ErrorMessage = "{0} limit is {1} characters, use State Code")]
         public string State { get; set; }
 
         [Column(TypeName = "Decimal(5,2)")]
@@ -40,12 +40,14 @@ namespace SkiTracker.Models {
 
         public bool BeginnerFriendly { get; set; }
 
-        public bool ExpertsOnly { get; set; }
+        public bool ExpertsFriendly { get; set; }
 
         public bool NightSki { get; set; }
 
         public bool Snowmaking { get; set; }
 
-
+        public bool MountainTransportation { get; set; }
+        [StringLength(255, ErrorMessage = "{0} limit is {1} characters.")]
+        public string Notes { get; set; }
     }
 }
