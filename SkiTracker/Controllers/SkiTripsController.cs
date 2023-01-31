@@ -58,8 +58,25 @@ namespace SkiTracker.Controllers
 
         }
 
-        //Update LodgingCost to the correct amount by taking HousingCostPerNight from SkiTrip and multiplying it by the # of nights based on arrival/departure time.
+        
         //private async Task<ActionResult> UpdateLodgeCost(int SkiTripAttendeeId) {}
+        private async Task<ActionResult> CalcLodge(int SkiTripAttendeeID) {
+            var attendee = await _context.SkiTripAttendees.FindAsync(SkiTripAttendeeID);
+            if (attendee == null) {
+                throw new Exception(
+                    "Attendee does not exist"
+                    );
+            }
+                //Update LodgingCost to the correct amount by taking HousingTotal from SkiTrip and dividing it by attendees
+                attendee.LodgingCost = (from STA in _context.SkiTripAttendees
+                                   join ST in _context.SkiTrips
+                                   on STA.SkiTripId equals ST.Id
+                                   where SkiTripAttendeeID == STA.Id
+                                   select new {
+                                       LodgeCost = ST.HousingTotal / ST.Attendees
+                                   }).Sum(x => x.LodgeCost);
+
+        }
 
         // GET: api/SkiTrips
         [HttpGet]

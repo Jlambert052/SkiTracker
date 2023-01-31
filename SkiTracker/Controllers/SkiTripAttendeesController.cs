@@ -31,29 +31,26 @@ namespace SkiTracker.Controllers
 
         //PRIVATE: Update functionality
 
-        //Update # of attendees in SkiTrip based on changes to SkiTripAttendees
-        /* obselete; added on Ski Trip Controller.
-         * private async Task<ActionResult> UpdateAttendeeInt(int SkiTripAttendeeId) {
-            var SkiTripAttendee = await _context.SkiTripAttendees.FindAsync(SkiTripAttendeeId);
 
-            if(SkiTripAttendee == null) {
-                throw new Exception(
-                    "Error; entry does not exist");
-            }
-            var SkiTrip = await _context.SkiTrips.FindAsync(SkiTripAttendee.SkiTripId);
-
-            SkiTrip.Attendees = (from ST in _context.SkiTrips
-                                 join STA in _context.SkiTripAttendees
-                                 on ST.Id equals STA.SkiTripId
-                                 select new {
-                                     AttendeeTotal = ST.Skiiers
-                                 }).Count();
-        }
-        */
 
         //Update LodgePaid to check if the amount under PaidAmount is = to LodgingCost
-        //private async Task<ActionResult> UpdateLodgePaid(int SkiTripAttendeeId) {}
-        
+        //private async Task<ActionResult> UpdateLodgeCost(int SkiTripAttendeeId) {}
+        private async Task<ActionResult> Lodge(int SkiTripAttendeeID) {
+            var attendee = await _context.SkiTripAttendees.FindAsync(SkiTripAttendeeID);
+            if (attendee == null) {
+                throw new Exception(
+                    "Attendee does not exist"
+                    );
+            }
+            //checks if the amount paid equals the lodging cost; if so updates paid to TRUE.
+            attendee.LodgePaid = (from STA in _context.SkiTripAttendees
+                                  where SkiTripAttendeeID == STA.Id
+                                  select new {
+                                      Total = STA.LodgingCost - STA.PaidAmount
+                                  }).Equals(0);
+
+        }
+
 
         // GET: api/SkiTripAttendees/5
         [HttpGet("{id}")]
