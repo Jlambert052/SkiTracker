@@ -18,6 +18,8 @@ namespace SkiTracker.Models {
 
         public DbSet<SkiTripAttendee> SkiTripAttendees { get; set; }
 
+        public DbSet<Housing> Housings { get; set; }
+
         public SkiTrackerDbContext(DbContextOptions<SkiTrackerDbContext> options) : base(options) { }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder) {

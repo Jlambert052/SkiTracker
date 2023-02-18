@@ -23,6 +23,10 @@ namespace SkiTracker.Models {
 
         public int PassCost { get; set; } = 1;
 
+        public bool Ikon { get; set; } = false;
+
+        public bool Epic { get; set; } = false;
+
         [Column(TypeName = "Decimal(5,2)")]
         public decimal YearlySnowfall { get; set; } = 1;
 
@@ -31,6 +35,9 @@ namespace SkiTracker.Models {
 
         [StringLength(25)]
         public string CloseTime { get; set; } = "7 pm";
+
+        [StringLength(100)]
+        public string Airports { get; set; } = "";
 
         public int Lifts { get; set; }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using SkiTracker.Models;
 
@@ -39,9 +40,11 @@ namespace SkiTracker.Controllers
 
             //calculate housing cost as a function of # of nights and 1 night cost. Days = total days -1.
             skiTrip.HousingTotal = (from ST in _context.SkiTrips
+                                    join STH in _context.Housings
+                                    on ST.ResortId equals STH.ResortId
                                     where skiTripId == ST.Id
                                     select new {
-                                        HousingTot = ST.HousingCostPerNight * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
+                                        HousingTot = STH. * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
                                     }).Sum(x => x.HousingTot);
 
             //calculate Ticket total cost as function of day ticket price * days of skiing based on arrival and departure dates. 
