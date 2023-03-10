@@ -24,6 +24,7 @@ namespace SkiTracker.Controllers
         //Private: Recalculate functionality.
         private async Task<ActionResult>  RecalcSkiTrip(int skiTripId) {
             var skiTrip = await _context.SkiTrips.FindAsync(skiTripId);
+
             if(skiTrip == null) {
                 throw new Exception(
                     "Invalid; trip does not exist"
@@ -39,12 +40,12 @@ namespace SkiTracker.Controllers
                                  }).Count();
 
             //calculate housing cost as a function of # of nights and 1 night cost. Days = total days -1.
-            skiTrip.HousingTotal = (from ST in _context.SkiTrips
+            skiTrip.Housing.LodgingTotal = (from ST in _context.SkiTrips
                                     join STH in _context.Housings
                                     on ST.ResortId equals STH.ResortId
                                     where skiTripId == ST.Id
                                     select new {
-                                        HousingTot = STH. * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
+                                        HousingTot = STH.LodgingCostPerNight * (ST.Departure.DayNumber - (ST.Arrival.DayNumber + 1))
                                     }).Sum(x => x.HousingTot);
 
             //calculate Ticket total cost as function of day ticket price * days of skiing based on arrival and departure dates. 
@@ -70,14 +71,16 @@ namespace SkiTracker.Controllers
                     "Attendee does not exist"
                     );
             }
-                //Update LodgingCost to the correct amount by taking HousingTotal from SkiTrip and dividing it by attendees
+                //Update LodgingCost to the correct amount by taking LodgingTotal from SkiTrip.Housing and dividing it by attendees
                 attendee.LodgingCost = (from STA in _context.SkiTripAttendees
                                    join ST in _context.SkiTrips
                                    on STA.SkiTripId equals ST.Id
                                    where SkiTripAttendeeID == STA.Id
                                    select new {
-                                       LodgeCost = ST.HousingTotal / ST.Attendees
+                                       LodgeCost = ST.Housing.LodgingTotal / ST.Attendees
                                    }).Sum(x => x.LodgeCost);
+
+            return NoContent();
 
         }
 
