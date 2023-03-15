@@ -39,22 +39,23 @@ namespace SkiTracker.Models {
         [StringLength(100)]
         public string Airports { get; set; } = "";
 
-        public int Lifts { get; set; }
+        public int Lifts { get; set; } = 1;
 
-        public int Vertical { get; set; }
+        public int Vertical { get; set; } = 0;
 
-        public int Trails { get; set; }
+        public int Trails { get; set; } = 0;
 
-        public bool BeginnerFriendly { get; set; }
+        public bool BeginnerFriendly { get; set; } = true;
 
-        public bool ExpertsFriendly { get; set; }
+        public bool ExpertsFriendly { get; set; } = true;
 
-        public bool NightSki { get; set; }
+        public bool NightSki { get; set; } = true; 
 
-        public bool Snowmaking { get; set; }
+        public bool Snowmaking { get; set; } = true;
 
-        public bool MountainTransportation { get; set; }
+        public bool MountainTransportation { get; set; } = true;
+
         [StringLength(255, ErrorMessage = "{0} limit is {1} characters.")]
-        public string Notes { get; set; }
+        public string Notes { get; set; } = "";
     }
 }

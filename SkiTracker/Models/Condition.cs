@@ -9,16 +9,16 @@ namespace SkiTracker.Models {
         public int id { get; set; }
 
         [Column(TypeName = "Date")]
-        public DateOnly Date { get; set; }
+        public DateOnly Date { get; set; } = new DateOnly();
 
-        [Column(TypeName ="Decimal(5,2)")]
-        public decimal TemperatureF { get; set; }
-
-        [StringLength(75)]
-        public string Weather { get; set; }
+        [Column(TypeName = "Decimal(5,2)")]
+        public decimal TemperatureF { get; set; } = 32;
 
         [StringLength(75)]
-        public string SnowCondition { get; set; }
+        public string Weather { get; set; } = "";
+
+        [StringLength(75)]
+        public string SnowCondition { get; set; } = "";
 
 
         public int ResortId { get; set; }

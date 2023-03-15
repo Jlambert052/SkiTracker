@@ -49,6 +49,8 @@ namespace SkiTracker.Controllers
                                       Total = STA.LodgingCost - STA.PaidAmount
                                   }).Equals(0);
 
+            return NoContent();
+
         }
 
 

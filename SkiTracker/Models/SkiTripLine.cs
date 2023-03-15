@@ -5,7 +5,7 @@ namespace SkiTracker.Models {
     public class SkiTripLine {
         public int Id { get; set; }
 
-        public int RunCount { get; set; }
+        public int RunCount { get; set; } = 0;
 
         public int RunId { get; set; }
         public virtual Run? Run { get; set; }

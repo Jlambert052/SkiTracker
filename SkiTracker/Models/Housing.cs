@@ -28,7 +28,7 @@ namespace SkiTracker.Models {
 
         public bool SkiOut { get; set; } = false;
 
-        public int MilesToMountain { get; set; }
+        public int MilesToMountain { get; set; } = 0;
 
         public bool Parking { get; set; } = true;
 

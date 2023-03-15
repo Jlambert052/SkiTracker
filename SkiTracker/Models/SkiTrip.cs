@@ -35,7 +35,7 @@ namespace SkiTracker.Models {
 
         public int Rating { get; set; } = 0;
 
-        public int RunTotal { get; set; }
+        public int RunTotal { get; set; } = 0;
 
         public virtual IEnumerable<SkiTripAttendee>? Skiiers { get; set; }
 
