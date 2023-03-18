@@ -22,7 +22,7 @@ namespace SkiTracker.Models {
         public int ResortId { get; set; }
         public virtual Resort? Resort { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string Status { get; set; } = "planning";
 
         public int Attendees { get; set; } = 1;
@@ -32,7 +32,7 @@ namespace SkiTracker.Models {
 
         [StringLength(255)]
         public string Notes { get; set; } = "";
-
+        [Range(1,5, ErrorMessage = "Grade the Resort on a whole number scale, 1 to 5")]
         public int Rating { get; set; } = 0;
 
         public int RunTotal { get; set; } = 0;

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkiTracker.Models {
@@ -16,9 +17,11 @@ namespace SkiTracker.Models {
 
         public int RunCountTotal { get; set; } = 0;
 
+        [Required]
         public int SkiierId { get; set; }
         public virtual Skiier? Skiier {get; set;}
 
+        [Required]
         public int SkiTripId { get; set; }
         public virtual SkiTrip? SkiTrip {get; set;}
 

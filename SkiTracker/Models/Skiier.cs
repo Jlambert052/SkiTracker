@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace SkiTracker.Models {
-
+    [Index("Name", IsUnique = true, Name = "NameIndex")]
+    [Index("Email", IsUnique = true, Name = "EmailIndex")]
     public class Skiier {
 
         [Key]
@@ -21,7 +22,7 @@ namespace SkiTracker.Models {
         public string SnowSport { get; set; }
 
         [StringLength(50)]
-        public string Experience { get; set; }
+        public string? Experience { get; set; }
 
         public virtual IEnumerable<SkiTrip>? Trips { get; set; }
 

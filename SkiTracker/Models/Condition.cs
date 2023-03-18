@@ -20,7 +20,6 @@ namespace SkiTracker.Models {
         [StringLength(75)]
         public string SnowCondition { get; set; } = "";
 
-
         public int ResortId { get; set; }
         public virtual Resort? Resort { get; set; }
 
